@@ -1,0 +1,652 @@
+/* ===== RESET & BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #0c2461 0%, #1e3799 100%);
+    color: #f5f5f5;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 10px;
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3 {
+    font-family: 'MedievalSharp', cursive;
+    font-weight: normal;
+}
+
+h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    color: #f6b93b;
+    text-shadow: 3px 3px 0 #000;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+    color: #78e08f;
+    border-bottom: 2px solid #4a69bd;
+    padding-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #82ccdd;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+/* ===== LAYOUT ===== */
+.game-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 1200px) {
+    .game-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== PANELS ===== */
+.left-panel, .center-panel, .right-panel {
+    background: rgba(25, 42, 86, 0.85);
+    border-radius: 15px;
+    padding: 20px;
+    border: 2px solid #4a69bd;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== CHARACTER SECTION ===== */
+.character-section {
+    margin-bottom: 25px;
+}
+
+.character-container {
+    background: rgba(10, 20, 50, 0.7);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    margin-bottom: 15px;
+    border: 1px solid #3c6382;
+}
+
+.character {
+    position: relative;
+    width: 120px;
+    height: 180px;
+    transition: all 0.5s ease;
+}
+
+/* Style de base du personnage */
+.character-head {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: #f8c291;
+    border-radius: 50%;
+    z-index: 3;
+}
+
+.character-body {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 80px;
+    background-color: #4a69bd;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+.character-legs {
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 50px;
+    background-color: #1e3799;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+/* Évolutions du personnage par niveau */
+.character.level-5 .character-body {
+    background-color: #78e08f;
+    box-shadow: 0 0 10px #78e08f;
+}
+
+.character.level-10 .character-body {
+    background-color: #f6b93b;
+    box-shadow: 0 0 15px #f6b93b;
+}
+
+.character.level-15 .character-body {
+    background-color: #e55039;
+    box-shadow: 0 0 20px #e55039;
+}
+
+.character.level-20 .character-body {
+    background-color: #8e44ad;
+    box-shadow: 0 0 25px #8e44ad;
+}
+
+.character.level-25 .character-body {
+    background: linear-gradient(45deg, #8e44ad, #3498db);
+    box-shadow: 0 0 30px rgba(142, 68, 173, 0.8);
+}
+
+/* Aura pour les hauts niveaux */
+.character.level-30::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(246, 185, 59, 0.3) 0%, rgba(246, 185, 59, 0) 70%);
+    z-index: 0;
+}
+
+.character-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.level-badge {
+    background: linear-gradient(135deg, #f6b93b, #e55039);
+    color: #0c2461;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.xp-total, .days-counter {
+    font-size: 1rem;
+    color: #82ccdd;
+}
+
+/* ===== STATS SECTION ===== */
+.stats-section {
+    margin-bottom: 25px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.stat-item {
+    background: rgba(30, 55, 153, 0.6);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #3c6382;
+    transition: transform 0.3s;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    background: rgba(30, 55, 153, 0.8);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #82ccdd;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #f6b93b;
+}
+
+/* ===== HABITS SECTION ===== */
+.habits-list {
+    margin-bottom: 15px;
+}
+
+.habit {
+    display: flex;
+    align-items: center;
+    background: rgba(60, 99, 130, 0.4);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 4px solid #78e08f;
+}
+
+.habit-icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    color: #78e08f;
+    width: 40px;
+    text-align: center;
+}
+
+.habit-info {
+    flex: 1;
+}
+
+.habit-name {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.habit-xp {
+    color: #f6b93b;
+    font-size: 0.9rem;
+}
+
+.total-daily-xp {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #f6b93b;
+    background: rgba(30, 55, 153, 0.6);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* ===== XP SECTION ===== */
+.xp-section {
+    margin-bottom: 30px;
+}
+
+.level-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.level-display {
+    font-size: 1.8rem;
+    color: #f6b93b;
+    font-weight: bold;
+}
+
+.xp-display {
+    font-size: 1.4rem;
+    color: #82ccdd;
+}
+
+.xp-bar-container {
+    height: 30px;
+    background: rgba(30, 55, 153, 0.6);
+    border-radius: 15px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    border: 2px solid #3c6382;
+    position: relative;
+}
+
+.xp-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #78e08f, #f6b93b);
+    border-radius: 15px;
+    transition: width 0.8s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.xp-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.xp-bar-label {
+    text-align: center;
+    font-weight: bold;
+    color: #f6b93b;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+/* ===== BUTTONS ===== */
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn {
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #78e08f, #38ada9);
+    color: #0c2461;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #38ada9, #78e08f);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 15px rgba(56, 173, 169, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #f6b93b, #e58e26);
+    color: #0c2461;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #e58e26, #f6b93b);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 15px rgba(229, 142, 38, 0.4);
+}
+
+.btn-save {
+    background: linear-gradient(135deg, #4a69bd, #1e3799);
+    color: #f5f5f5;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.btn-save:hover {
+    background: linear-gradient(135deg, #1e3799, #4a69bd);
+    transform: translateY(-3px);
+}
+
+.btn-reset {
+    background: linear-gradient(135deg, #e55039, #b71540);
+    color: #f5f5f5;
+    width: 100%;
+}
+
+.btn-reset:hover {
+    background: linear-gradient(135deg, #b71540, #e55039);
+    transform: translateY(-3px);
+}
+
+/* ===== QUESTS SECTION ===== */
+.quests-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #3c6382;
+}
+
+.tab-btn {
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    color: #82ccdd;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.tab-btn.active {
+    color: #f6b93b;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #f6b93b;
+}
+
+.tab-btn:hover:not(.active) {
+    color: #78e08f;
+}
+
+.quest-tab-content {
+    display: none;
+}
+
+.quest-tab-content.active {
+    display: block;
+}
+
+.quest {
+    display: flex;
+    align-items: center;
+    background: rgba(30, 55, 153, 0.6);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-left: 4px solid #f6b93b;
+    transition: transform 0.3s;
+}
+
+.quest:hover {
+    transform: translateX(5px);
+    background: rgba(30, 55, 153, 0.8);
+}
+
+.quest-icon {
+    font-size: 1.8rem;
+    margin-right: 15px;
+    color: #f6b93b;
+    width: 50px;
+    text-align: center;
+}
+
+.quest-content {
+    flex: 1;
+}
+
+.quest-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.quest-xp {
+    color: #78e08f;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.btn-quest-complete {
+    padding: 8px 15px;
+    background: linear-gradient(135deg, #78e08f, #38ada9);
+    border: none;
+    border-radius: 6px;
+    color: #0c2461;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-quest-complete:hover {
+    background: linear-gradient(135deg, #38ada9, #78e08f);
+    transform: translateY(-2px);
+}
+
+/* ===== JOURNAL SECTION ===== */
+.journal-content {
+    height: 250px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.journal-entry {
+    background: rgba(60, 99, 130, 0.3);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 3px solid #4a69bd;
+}
+
+.journal-date {
+    color: #f6b93b;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.journal-text {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+}
+
+/* ===== INSTRUCTIONS SECTION ===== */
+.instructions-list {
+    padding-left: 20px;
+}
+
+.instructions-list li {
+    margin-bottom: 10px;
+    color: #e0e0e0;
+}
+
+.instructions-list strong {
+    color: #78e08f;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(25, 42, 86, 0.9);
+    border-radius: 10px;
+    margin-top: 20px;
+    border-top: 2px solid #4a69bd;
+}
+
+.footer-note {
+    font-style: italic;
+    color: #82ccdd;
+    margin-top: 5px;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(30, 55, 153, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4a69bd;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1e3799;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes levelUp {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.level-up {
+    animation: levelUp 0.5s ease;
+}
+
+@keyframes xpGain {
+    0% { background-color: #78e08f; }
+    50% { background-color: #f6b93b; }
+    100% { background-color: #78e08f; }
+}
+
+.xp-gain {
+    animation: xpGain 0.8s ease;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    .game-layout {
+        gap: 15px;
+    }
+    
+    .left-panel, .center-panel, .right-panel {
+        padding: 15px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        padding: 12px;
+        font-size: 1rem;
+    }
+    
+    .character-container {
+        height: 200px;
+    }
+    
+    .character {
+        width: 100px;
+        height: 150px;
+    }
+}
