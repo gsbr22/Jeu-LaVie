@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG de Vie - Votre aventure personnelle</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-dragon"></i> RPG de Vie</h1>
+            <p class="subtitle">Transformez votre vie en aventure épique</p>
+        </header>
+
+        <div class="game-layout">
+            <!-- Section gauche: Personnage et statistiques -->
+            <div class="left-panel">
+                <div class="character-section">
+                    <h2><i class="fas fa-user"></i> Votre Personnage</h2>
+                    <div class="character-container">
+                        <div class="character" id="character">
+                            <!-- Le personnage sera généré par JavaScript -->
+                        </div>
+                    </div>
+                    <div class="character-info">
+                        <div class="level-badge" id="level-badge">Niveau 1</div>
+                        <div class="xp-total">XP Totale: <span id="total-xp">0</span></div>
+                        <div class="days-counter">Jours: <span id="days-counter">0</span></div>
+                    </div>
+                </div>
+
+                <div class="stats-section">
+                    <h2><i class="fas fa-chart-line"></i> Statistiques</h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-label">Prochain Niveau</div>
+                            <div class="stat-value" id="next-level-xp">2000 XP</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">XP Actuelle</div>
+                            <div class="stat-value" id="current-xp">0 / 2000</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">Progression</div>
+                            <div class="stat-value" id="progress-percent">0%</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-label">XP Consommée</div>
+                            <div class="stat-value" id="consumed-xp">0 XP</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="habits-section">
+                    <h2><i class="fas fa-calendar-check"></i> Habitudes Quotidiennes</h2>
+                    <div class="habits-list">
+                        <div class="habit">
+                            <div class="habit-icon"><i class="fas fa-dumbbell"></i></div>
+                            <div class="habit-info">
+                                <div class="habit-name">Sport</div>
+                                <div class="habit-xp">+27 XP / jour</div>
+                            </div>
+                        </div>
+                        <div class="habit">
+                            <div class="habit-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="habit-info">
+                                <div class="habit-name">Enseignement</div>
+                                <div class="habit-xp">+18.72 XP / jour</div>
+                            </div>
+                        </div>
+                        <div class="habit">
+                            <div class="habit-icon"><i class="fas fa-chart-pie"></i></div>
+                            <div class="habit-info">
+                                <div class="habit-name">Business</div>
+                                <div class="habit-xp">+37.5 XP / jour</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="total-daily-xp">Total quotidien: <span id="daily-xp-total">83.22 XP</span></div>
+                </div>
+            </div>
+
+            <!-- Section centrale: Progression et actions -->
+            <div class="center-panel">
+                <div class="xp-section">
+                    <h2><i class="fas fa-trophy"></i> Progression</h2>
+                    <div class="level-info">
+                        <div class="level-display">
+                            Niveau <span id="current-level">1</span>
+                        </div>
+                        <div class="xp-display">
+                            <span id="current-level-xp">0</span> / <span id="required-xp">2000</span> XP
+                        </div>
+                    </div>
+                    <div class="xp-bar-container">
+                        <div class="xp-bar" id="xp-bar"></div>
+                    </div>
+                    <div class="xp-bar-label" id="xp-bar-label">0%</div>
+
+                    <div class="actions">
+                        <button class="btn btn-primary" id="next-day-btn">
+                            <i class="fas fa-sun"></i> Jour Suivant (+83.22 XP)
+                        </button>
+                        <button class="btn btn-secondary" id="add-xp-btn">
+                            <i class="fas fa-plus-circle"></i> Ajouter 100 XP (test)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="quests-section">
+                    <h2><i class="fas fa-scroll"></i> Quêtes</h2>
+                    
+                    <div class="quests-tabs">
+                        <button class="tab-btn active" data-tab="side">Quêtes Secondaires</button>
+                        <button class="tab-btn" data-tab="main">Quêtes Principales</button>
+                    </div>
+
+                    <div class="quests-container">
+                        <!-- Quêtes secondaires -->
+                        <div class="quest-tab-content active" id="side-quests">
+                            <div class="quest" data-xp="800">
+                                <div class="quest-icon"><i class="fas fa-mountain"></i></div>
+                                <div class="quest-content">
+                                    <div class="quest-name">Ascension du Mont Blanc</div>
+                                    <div class="quest-xp">+800 XP</div>
+                                    <button class="btn-quest-complete">Compléter</button>
+                                </div>
+                            </div>
+                            <div class="quest" data-xp="700">
+                                <div class="quest-icon"><i class="fas fa-home"></i></div>
+                                <div class="quest-content">
+                                    <div class="quest-name">Rénover une maison seul</div>
+                                    <div class="quest-xp">+700 XP</div>
+                                    <button class="btn-quest-complete">Compléter</button>
+                                </div>
+                            </div>
+                            <div class="quest" data-xp="900">
+                                <div class="quest-icon"><i class="fas fa-running"></i></div>
+                                <div class="quest-content">
+                                    <div class="quest-name">Ultra-trail célèbre (UTMB)</div>
+                                    <div class="quest-xp">+900 XP</div>
+                                    <button class="btn-quest-complete">Compléter</button>
+                                </div>
+                            </div>
+                            <div class="quest" data-xp="600">
+                                <div class="quest-icon"><i class="fas fa-bicycle"></i></div>
+                                <div class="quest-content">
+                                    <div class="quest-name">Étape du Tour de France</div>
+                                    <div class="quest-xp">+600 XP</div>
+                                    <button class="btn-quest-complete">Compléter</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quêtes principales -->
+                        <div class="quest-tab-content" id="main-quests">
+                            <div class="quest" data-xp="1500">
+                                <div class="quest-icon"><i class="fas fa-money-bill-wave"></i></div>
+                                <div class="quest-content">
+                                    <div class="quest-name">Gagner 5000€ par mois</div>
+                                    <div class="quest-xp">+1500 XP</div>
+                                    <button class="btn-quest-complete">Compléter</button>
+                                </div>
+                            </div>
+                            <div class="quest" data-xp="1700">
+                                <div class="quest-icon"><i class="fas fa-briefcase"></i></div>
+                                <div class="quest-content">
+                                    <div class="quest-name">Créer un business qui fonctionne</div>
+                                    <div class="quest-xp">+1700 XP</div>
+                                    <button class="btn-quest-complete">Compléter</button>
+                                </div>
+                            </div>
+                            <div class="quest" data-xp="1400">
+                                <div class="quest-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <div class="quest-content">
+                                    <div class="quest-name">Obtenir un Bac +5 STAPS</div>
+                                    <div class="quest-xp">+1400 XP</div>
+                                    <button class="btn-quest-complete">Compléter</button>
+                                </div>
+                            </div>
+                            <div class="quest" data-xp="1900">
+                                <div class="quest-icon"><i class="fas fa-car"></i></div>
+                                <div class="quest-content">
+                                    <div class="quest-name">Acheter une Ferrari 812 GTS</div>
+                                    <div class="quest-xp">+1900 XP</div>
+                                    <button class="btn-quest-complete">Compléter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section droite: Journal et informations -->
+            <div class="right-panel">
+                <div class="journal-section">
+                    <h2><i class="fas fa-book"></i> Journal d'Aventure</h2>
+                    <div class="journal-content" id="journal-content">
+                        <div class="journal-entry">
+                            <div class="journal-date">Début de l'aventure</div>
+                            <div class="journal-text">Bienvenue dans votre RPG de Vie! Commencez vos habitudes quotidiennes ou accomplissez des quêtes pour progresser.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instructions-section">
+                    <h2><i class="fas fa-info-circle"></i> Comment jouer</h2>
+                    <ul class="instructions-list">
+                        <li>Cliquez sur <strong>"Jour Suivant"</strong> pour gagner l'XP de vos habitudes quotidiennes</li>
+                        <li>Complétez des <strong>quêtes</strong> pour des bonus d'XP importants</li>
+                        <li>Votre personnage <strong>évolue visuellement</strong> avec votre niveau</li>
+                        <li>La progression est sauvegardée automatiquement</li>
+                        <li>Les habitudes quotidiennes sont la clé de la progression à long terme</li>
+                    </ul>
+                </div>
+
+                <div class="save-section">
+                    <button class="btn btn-save" id="save-btn">
+                        <i class="fas fa-save"></i> Sauvegarder
+                    </button>
+                    <button class="btn btn-reset" id="reset-btn">
+                        <i class="fas fa-redo"></i> Réinitialiser
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>RPG de Vie - Transformez votre discipline quotidienne en progression épique</p>
+            <p class="footer-note">La persévérance est la vraie magie de ce jeu</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
